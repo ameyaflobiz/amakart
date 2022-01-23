@@ -1,5 +1,5 @@
 class OrderProduct < ApplicationRecord
   belongs_to :order
   belongs_to :product
-  belongs_to :store
+  belongs_to :seller
 end

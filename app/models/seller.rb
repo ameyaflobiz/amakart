@@ -1,3 +1,3 @@
-class Store < ApplicationRecord
+class Seller < ApplicationRecord
 	has_one :address, as: :addressable
 end
