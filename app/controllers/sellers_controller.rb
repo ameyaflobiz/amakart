@@ -1,5 +1,5 @@
 class SellersController < ApplicationController
-  skip_before_action :authorize_request, only: [:create, :login, :get_otp]
+  skip_before_action :authorize_request, only: [:index, :create, :login, :get_otp]
   before_action :find_seller, except: [:index, :create, :login, :get_otp]
   def index
     
@@ -20,9 +20,8 @@ class SellersController < ApplicationController
 
       token = JwtService.new().encode(id: @seller.id)
       render json:{ token: token, message: "The OTP was valid & a JWT Token has been created and is valid for 24 hours .", seller_email: @seller.email}, status: :ok
-    
     else
-        render json: {error: "incorrect OTP"}, status: :unauthorized
+      raise CustomException.new("raised in seller login","Invalid credentials/OTP")
     end
   end
 

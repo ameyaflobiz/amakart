@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: [:create, :login, :get_otp]
+  skip_before_action :authorize_request, only: [:index, :create, :login, :get_otp]
   before_action :find_user, except: [:index, :create, :login, :get_otp]
 
   def index
-    
+    # raise CustomException.new("custom error code", "Exception raised in index action")
   end
 
   def create
@@ -22,8 +22,8 @@ class UsersController < ApplicationController
       token = JwtService.new().encode(id: @user.id)
       render json:{ token: token, message: "The OTP was valid & a JWT Token has been created and is valid for 24 hours .", username: @user.email}, status: :ok
     
-    else
-        render json: {error: "incorrect OTP"}, status: :unauthorized
+    else 
+      raise CustomException.new("raised in user login","Invalid credentials/OTP") 
     end
 
   end

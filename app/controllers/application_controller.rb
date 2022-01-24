@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::API
+	include ErrorHandler
 	before_action :authorize_request
 	attr_reader :decoded_id
 
