@@ -1,0 +1,1 @@
+USER_ROLES = { buyer: 0, product_team: 1}
