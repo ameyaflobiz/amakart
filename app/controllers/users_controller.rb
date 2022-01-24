@@ -3,13 +3,13 @@ class UsersController < ApplicationController
   before_action :find_user, except: [:index, :create, :login, :get_otp]
 
   def index
-
+    
   end
 
   def create
     @user= User.new(user_params)
     if @user.save!
-        token= JwtService.new().encode({user_id:@user.id})
+        token= JwtService.new().encode({id:@user.id})
         render json: {user:@user, token: token}, status: :created
     end
   end
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password]) && @user.authenticate_otp(params[:otp].to_s, drift: 60)
 
-      token = JwtService.new().encode(user_id: @user.id)
+      token = JwtService.new().encode(id: @user.id)
       render json:{ token: token, message: "The OTP was valid & a JWT Token has been created and is valid for 24 hours .", username: @user.email}, status: :ok
     
     else
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
   private 
 
   def find_user
-    @user = User.find(@user_id)
+    @user = User.find(@decoded_id)
   rescue ActiveRecord::RecordNotFound
     render json:{ errors: 'User not found'}, status: :not_found
   end
