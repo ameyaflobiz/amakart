@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     collection do
       post :register_product
       put :update_product
+      get :search
     end
 
   end

@@ -111,6 +111,9 @@ GEM
     hirb (0.7.3)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
+    jbuilder (2.11.5)
+      actionview (>= 5.0.0)
+      activesupport (>= 5.0.0)
     jwt (2.3.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -200,6 +203,7 @@ DEPENDENCIES
   byebug
   config
   hirb
+  jbuilder
   jwt
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)
