@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
     @user= User.new(user_params)
     if @user.save!
-        token= JwtService.new().encode({id:@user.id})
+        token= JwtService.new().encode({id: @user.id, type: "user"})
         render json: {user:@user, token: token}, status: :created
     end
   end
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password]) && @user.authenticate_otp(params[:otp].to_s, drift: 60)
 
-      token = JwtService.new().encode(id: @user.id)
+      token = JwtService.new().encode(id: @user.id, type: "user")
       render json:{ token: token, message: "The OTP was valid & a JWT Token has been created and is valid for 24 hours .", username: @user.email}, status: :ok
     
     else 
