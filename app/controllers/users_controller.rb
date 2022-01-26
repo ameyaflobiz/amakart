@@ -8,8 +8,11 @@ class UsersController < ApplicationController
 
   def create
     @user= User.new(user_params)
+
     if @user.save!
         token= JwtService.new().encode({id: @user.id, type: "user"})
+        
+        @user.create_address(shipping_address: address_params,billing_address: address_params)
         render json: {user:@user, token: token}, status: :created
     end
   end
@@ -43,5 +46,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.permit(:email, :password, :phone_num, :name, :user_type)
+  end
+
+  def address_params
+    params.permit(:address => [:line1,:line2,:city,:state,:pincode])
   end
 end

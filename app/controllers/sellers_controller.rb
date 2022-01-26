@@ -8,6 +8,7 @@ class SellersController < ApplicationController
   def create
     @seller= Seller.new(seller_params)
     if @seller.save!
+        @seller.create_address(billing_address: billing_address_params, shipping_address: shipping_address_params)
         token= JwtService.new().encode({id: @seller.id, type: "seller"})
         render json: {seller: @seller, token: token}, status: :created
     end
@@ -42,4 +43,11 @@ class SellersController < ApplicationController
     params.permit(:email,:password,:name)
   end
 
+  def billing_address_params
+    params.permit(:billing_address => [:line1,:line2,:city,:state,:pincode])
+  end
+
+  def shipping_address_params
+    params.permit(:shipping_address => [:line1,:line2,:city,:state,:pincode])
+  end
 end
