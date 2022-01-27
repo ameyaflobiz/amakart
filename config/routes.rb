@@ -41,5 +41,13 @@ Rails.application.routes.draw do
     end
 
   end
+
+  resources :orders do
+
+    collection do
+      post :generate_order
+    end
+
+  end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
