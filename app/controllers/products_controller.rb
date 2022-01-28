@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+	skip_before_action :authorize_request, only: [:search]
 	before_action :is_user_product?, only: [:add_product]
 	def add_product
 		if is_user_product?
@@ -11,6 +12,13 @@ class ProductsController < ApplicationController
 		end
 	end
 
+	def search
+
+		search_query = params[:search_query]
+
+		@products = SearchService.new().search(search_query)
+
+	end
 
 	private
 

@@ -1,5 +1,5 @@
 class SellerProductsController < ApplicationController
-	skip_before_action :authorize_request, only: [:search]
+	
 	before_action :find_product
 	def register_product
 
@@ -32,13 +32,7 @@ class SellerProductsController < ApplicationController
 
 	end
 
-	def search
 
-		search_query = params[:search_query]
-
-		@products = SearchService.new().search(search_query)
-
-	end
 
 	private
 

@@ -31,6 +31,7 @@ Rails.application.routes.draw do
 
     collection do 
       post :add_product
+      get :search
     end
 
   end
@@ -40,7 +41,7 @@ Rails.application.routes.draw do
     collection do
       post :register_product
       put :update_product
-      get :search
+      
     end
 
   end
