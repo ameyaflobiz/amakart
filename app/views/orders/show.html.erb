@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<%= stylesheet_link_tag '/assets/stylesheet/style.css', media: 'all'%>
+	<title>Document</title>
+</head>
+
+<body class = "bodyclass">
+	 <div class="offset-xl-2 col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 padding">
+     <div class="card">
+         <div class="card-header p-4">
+             <a class="pt-2 d-inline-block" href="index.html" data-abc="true">BBBootstrap.com</a>
+             <div class="float-right">
+                 <h3 class="mb-0"><%=" Order no: #{@order.id} "%></h3>
+                 <%= "Time: #{@invoice_details.created_at}" %>
+             </div>
+         </div>
+         <div class="card-body">
+             <div class="row mb-4">
+                 <div class="col-sm-6">
+                     <h5 class="mb-3">From:</h5>
+                     <h3 class="text-dark mb-1"><%= @seller.name%></h3>
+                     <div><%= @invoice_details.billing_address_seller["billing_address"]["line1"]%></div>
+                     <div><%= @invoice_details.billing_address_seller["billing_address"]["line2"]%></div>
+                     <div><%= @invoice_details.billing_address_seller["billing_address"]["city"]  +", "+
+                     @invoice_details.billing_address_seller["billing_address"]["state"]+"-"+
+                     @invoice_details.billing_address_seller["billing_address"]["pincode"]%></div>
+                     <div><%=%></div>
+                 </div>
+                 <div class="col-sm-6 ">
+                     <h5 class="mb-3">To:</h5>
+                     <h3 class="text-dark mb-1"><%= @user.name%></h3>
+                     <div><%= @user.address.shipping_address["address"]["line1"]%></div>
+                     <div><%= @user.address.shipping_address["address"]["line2"]%></div>
+                     <div><%= @user.address.shipping_address["address"]["city"]+", "+
+                     		@user.address.shipping_address["address"]["state"]+"-"+
+                     		@user.address.shipping_address["address"]["pincode"]%></div>
+                     <div><%=%></div>
+                 </div>
+             </div>
+             <div class="table-responsive-sm">
+                 <table class="table table-striped">
+                     <thead>
+                         <tr>
+                             <th class="center">#</th>
+                             <th>Item</th>
+                             <th class="right">Price</th>
+                             <th class="center">Qty</th>
+                             <th class="right">Total</th>
+                         </tr>
+                     </thead>
+                     <tbody>
+                         <tr>
+                             <td class="center">1</td>
+                             <td class="left strong"><%= @product.name%></td>
+                            
+                             <td class="right"><%="₹ #{@seller_product.price}"%></td>
+                             <td class="center">1</td>
+                             <td class="right"><%= "₹ #{@seller_product.price}"%></td>
+                         </tr>
+                         
+                     </tbody>
+                 </table>
+             </div>
+             <div class="row">
+                 <div class="col-lg-4 col-sm-5">
+                 </div>
+                 <div class="col-lg-4 col-sm-5 ml-auto">
+                     <table class="table table-clear">
+                         <tbody>
+                             <tr>
+                                 <td class="left">
+                                     <strong class="text-dark">Subtotal</strong>
+                                 </td>
+                                 <td class="right">$28,809,00</td>
+                             </tr>
+                             <tr>
+                                 <td class="left">
+                                     <strong class="text-dark">Discount (20%)</strong>
+                                 </td>
+                                 <td class="right">$5,761,00</td>
+                             </tr>
+                             <tr>
+                                 <td class="left">
+                                     <strong class="text-dark">VAT (10%)</strong>
+                                 </td>
+                                 <td class="right">$2,304,00</td>
+                             </tr>
+                             <tr>
+                                 <td class="left">
+                                     <strong class="text-dark">Total</strong> </td>
+                                 <td class="right">
+                                     <strong class="text-dark">$20,744,00</strong>
+                                 </td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+         </div>
+         <div class="card-footer bg-white">
+             <p class="mb-0">amakart.com, Sounth Block, New delhi, 110034</p>
+         </div>
+     </div>
+ </div>
+</body>
+</html>

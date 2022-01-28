@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::API
 	include ActionController::ImplicitRender
+	include ActionController::MimeResponds
 	include ErrorHandler
 	before_action :authorize_request
 	attr_reader :decoded_id, :decoded_type
