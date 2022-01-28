@@ -8,12 +8,13 @@ class OrdersController < ApplicationController
 
   end
   def generate_order
+
     @invoice_details = OrderService.new().add_order(order_params)
-    GeneratePdfWorker.perform_async(@invoice_details.id,@invoice_details.seller_id,@invoice_details.order_id)
     render json: { message: "Thank you for ordering!,Invoice is being generated",invoice_details: @invoice_details}
   end
 
   def show
+
     @invoice_details = OrderProduct.find_by(order_id: params[:id], seller_id: params[:seller_id])
     @product = Product.find(@invoice_details.product_id)
     @seller = Seller.find(params[:seller_id])
@@ -22,9 +23,11 @@ class OrdersController < ApplicationController
     @user = User.find(@order.user_id)
 
   end
+
   private
 
   def order_params
     params.permit(:product_id,:seller_id).merge(user_id:@decoded_id,user_type: @decoded_type)
   end
+
 end

@@ -18,6 +18,7 @@ class GeneratePdfWorker
 			puts e
 
 		end
+		# Save karke we can access urls later on
 		invoice_obj.save!
 	    
 

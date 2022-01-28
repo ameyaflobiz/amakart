@@ -1,9 +1,9 @@
 class SellersController < ApplicationController
   skip_before_action :authorize_request, only: [ :create, :login, :get_otp]
   before_action :find_seller, except: [:index, :create, :login, :get_otp]
-  def index
-    render json: @decoded_type
-  end
+  # def index
+  #   render json: @decoded_type
+  # end
 
   def create
     @seller= Seller.new(seller_params)

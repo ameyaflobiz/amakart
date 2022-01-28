@@ -1,13 +1,13 @@
 class ProductsController < ApplicationController
 	before_action :is_user_product?, only: [:add_product]
 	def add_product
-		if@check
+		if is_user_product?
 			# render json: params[:details]
 			puts params
 			@product = Product.create!(name: params[:name], details: params[:details])
 			render json: @product
 		else
-			raise CustomException.new("--","Buyer cannot add products")
+			raise CustomException.new("raised in products controller","Buyer cannot add products")
 		end
 	end
 
@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
 	private
 
 	def is_user_product?
-		@check = User.find(@decoded_id).user_type == "product_team"
+		User.find(@decoded_id).user_type == "product_team"
 	end
 
 
