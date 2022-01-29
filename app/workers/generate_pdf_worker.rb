@@ -8,7 +8,7 @@ class GeneratePdfWorker
 		invoice_obj = OrderProduct.find(invoice_id)
 
 		begin
-			grover = Grover.new("http://localhost:3000/orders/#{order_id}?seller_id=#{seller_id}&product_id=#{product_id}", format: 'A4')
+			grover = Grover.new("http://localhost:3000/orders/#{order_id}?invoice_id=#{invoice_id}", format: 'A4')
 			pdf = grover.to_pdf
 			File.open(("/Users/ameyajangam22/Desktop/rails-learn/amakart-invoices/Invoice_#{invoice_id}_#{product_id}.pdf"),'wb', encoding: 'ascii-8bit') do |f|
 				f.write(pdf)

@@ -19,9 +19,10 @@
              </div>
          </div>
          <div class="card-body">
+
              <div class="row mb-4">
                  <div class="col-sm-6">
-                     <h5 class="mb-3">From:</h5>
+                     <h5 class="mb-3">From:(Billing Address of Seller)</h5>
                      <h3 class="text-dark mb-1"><%= @seller.name%></h3>
                      <div><%= @invoice_details.billing_address_seller["billing_address"]["line1"]%></div>
                      <div><%= @invoice_details.billing_address_seller["billing_address"]["line2"]%></div>
@@ -31,7 +32,7 @@
                      <div><%=%></div>
                  </div>
                  <div class="col-sm-6 ">
-                     <h5 class="mb-3">To:</h5>
+                     <h5 class="mb-3">To:(Shipping Address of Buyer)</h5>
                      <h3 class="text-dark mb-1"><%= @user.name%></h3>
                      <div><%= @user.address.shipping_address["address"]["line1"]%></div>
                      <div><%= @user.address.shipping_address["address"]["line2"]%></div>
@@ -58,8 +59,8 @@
                              <td class="left strong"><%= @product.name%></td>
                             
                              <td class="right"><%="₹ #{@seller_product.price}"%></td>
-                             <td class="center">1</td>
-                             <td class="right"><%= "₹ #{@seller_product.price}"%></td>
+                             <td class="center"> <%=@invoice_details.quantity%></td>
+                             <td class="right"><%= "₹ #{@seller_product.price* @invoice_details.quantity}"%></td>
                          </tr>
                          
                      </tbody>
@@ -75,25 +76,25 @@
                                  <td class="left">
                                      <strong class="text-dark">Subtotal</strong>
                                  </td>
-                                 <td class="right">$28,809,00</td>
+                                 <td class="right"><%= "₹ #{@seller_product.price* @invoice_details.quantity}"%></td>
                              </tr>
                              <tr>
                                  <td class="left">
-                                     <strong class="text-dark">Discount (20%)</strong>
+                                     <strong class="text-dark">Discount</strong>
                                  </td>
-                                 <td class="right">$5,761,00</td>
+                                 <td class="right">0</td>
                              </tr>
                              <tr>
                                  <td class="left">
-                                     <strong class="text-dark">VAT (10%)</strong>
+                                     <strong class="text-dark">GST</strong>
                                  </td>
-                                 <td class="right">$2,304,00</td>
+                                 <td class="right">0</td>
                              </tr>
                              <tr>
                                  <td class="left">
                                      <strong class="text-dark">Total</strong> </td>
                                  <td class="right">
-                                     <strong class="text-dark">$20,744,00</strong>
+                                     <strong class="text-dark"><%= "₹ #{@seller_product.price* @invoice_details.quantity}"%></strong>
                                  </td>
                              </tr>
                          </tbody>
@@ -102,7 +103,7 @@
              </div>
          </div>
          <div class="card-footer bg-white">
-             <p class="mb-0">amakart.com, Sounth Block, New delhi, 110034</p>
+             <p class="mb-0">amakart.com, South Block, New delhi, 110034</p>
          </div>
      </div>
  </div>
