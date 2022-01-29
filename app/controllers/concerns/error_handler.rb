@@ -19,7 +19,8 @@ module ErrorHandler
 			{ message: "Error Caught by global error handler", 
 			  exception: {
 				message: exception.message,
-				exception: exception
+				exception: exception,
+				trace: exception.backtrace
 			}}
 		end
 	end

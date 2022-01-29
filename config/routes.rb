@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   resources :orders do
 
     collection do
+      post :add_order
       post :generate_order
     end
 
