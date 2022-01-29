@@ -28,11 +28,17 @@ class OrderService
 			quantity = quantity.to_i
 
 			seller_product = SellerProduct.includes(:seller).find_by(product_id: product_id,seller_id: seller_id)
+			stock = seller_product.stock
+
+			if quantity > stock
+				raise CustomException.new("raised in order controller","Not enough products in stock")
+			end
+
 			seller_shipping_address = seller_product.seller.address.shipping_address
 			seller_billing_address = seller_product.seller.address.billing_address
 
 			price = seller_product.price
-			stock = seller_product.stock
+			
 			invoice_details = OrderProduct.create!(order_id: @order.id, 
 												   product_id: product_id,
 												   seller_id: seller_id, 
