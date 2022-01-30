@@ -10,7 +10,7 @@ class SellerProductsController < ApplicationController
 			render json: record
 
 		else
-			raise CustomException.new("--","Only Sellers can register products")
+			raise CustomException.new(400,"Only Sellers can register products")
 		end
 	end
 
@@ -27,7 +27,7 @@ class SellerProductsController < ApplicationController
 			render json: record
 
 		else
-			raise CustomException.new("--","Only Sellers can update products")
+			raise CustomException.new(400,"Only Sellers can update products")
 		end
 
 	end

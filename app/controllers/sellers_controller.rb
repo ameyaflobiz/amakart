@@ -22,7 +22,7 @@ class SellersController < ApplicationController
       token = JwtService.new().encode({id: @seller.id, type: "seller"})
       render json:{ token: token, message: "The OTP was valid & a JWT Token has been created and is valid for 24 hours .", seller_email: @seller.email}, status: :ok
     else
-      raise CustomException.new("raised in seller login","Invalid credentials/OTP")
+      raise CustomException.new(400,"Invalid credentials/OTP")
     end
   end
 
@@ -35,8 +35,6 @@ class SellersController < ApplicationController
 
   def find_seller
     @seller = Seller.find(@decoded_id)
-  rescue ActiveRecord::RecordNotFound
-    render json:{ errors: 'Seller not found'}, status: :not_found
   end
 
   def seller_params

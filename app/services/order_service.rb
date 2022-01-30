@@ -11,7 +11,7 @@ class OrderService
 
 		if user_type == "seller"
 
-			raise CustomException.new("raised in order controller", "Sellers can't buy products")
+			raise CustomException.new(400, "Sellers can't buy products")
 
 		end
 		

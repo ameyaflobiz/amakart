@@ -14,9 +14,18 @@ module ErrorHandler
 				exception: exception,
 				status: exception.status,
 			}}
+		elsif exception.class == JWT::DecodeError
+			render json: 
+			{ message: "Error Caught by global error handler", 
+			  exception: {
+				message: exception.message,
+				exception: exception,
+				status: exception.status,
+			}}			
+		end
 		else
 			render json:
-			{ message: "Error Caught by global error handler", 
+			{ message: "Error Caught by global error handler (unchecked)", 
 			  exception: {
 				message: exception.message,
 				exception: exception,

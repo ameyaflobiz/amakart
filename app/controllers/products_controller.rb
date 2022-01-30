@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
 			@product = Product.create!(name: params[:name], details: params[:details])
 			render json: @product
 		else
-			raise CustomException.new("raised in products controller","Buyer cannot add products")
+			raise CustomException.new(400,"Buyer cannot add products")
 		end
 	end
 
