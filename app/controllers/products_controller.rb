@@ -1,19 +1,19 @@
 class ProductsController < ApplicationController
 	skip_before_action :authorize_request, only: [:search]
-	before_action :is_user_product?, only: [:add_product]
+	before_action :is_user_product_team_member?, only: [:add_product]
 	def add_product
-		if is_user_product?
+		if is_user_product_team_member?
 			# render json: params[:details]
-			puts params
-			@product = Product.create!(name: params[:name], details: params[:details])
-			render json: @product
+			# puts params
+			product = Product.create!(name: params[:name], details: params[:details])
+			render json: product
 		else
 			raise CustomException.new(400,"Buyer cannot add products")
 		end
 	end
 
 	def search
-
+		#apply index and filtering
 		search_query = params[:search_query]
 
 		@products = SearchService.new().search(search_query)
@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
 
 	private
 
-	def is_user_product?
+	def is_user_product_team_member?
 		User.find(@decoded_id).user_type == "product_team"
 	end
 

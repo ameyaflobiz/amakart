@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
     # render json: "Working"
     order = OrderService.new().add_order_to_redis(order_params)
 
-    # render json: order
+    render json: order
 
   end
   def generate_order
@@ -27,7 +27,7 @@ class OrdersController < ApplicationController
     # Invoice generation ke liye socho
 
     OrderService.new().generate_order(@decoded_id,@decoded_type)
-    render json: { message: "Thank you for ordering!,Invoice is being generated",invoice_details: @invoice_details}
+    render json: { message: "Thank you for ordering!,Invoice is being generated"}
   end
 
   def show
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:product_id,:seller_id,:quantity).merge(user_id:@decoded_id,user_type: @decoded_type)
+    params.permit(:product_id,:seller_id,:quantity).merge(user_id: @decoded_id,user_type: @decoded_type)
   end
 
 

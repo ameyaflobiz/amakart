@@ -2,9 +2,9 @@ class UsersController < ApplicationController
   skip_before_action :authorize_request, only: [ :create, :login, :get_otp]
   before_action :find_user, except: [:index, :create, :login, :get_otp]
 
-  def index
-    raise CustomException.new(400, "Exception raised in index action")
-  end
+  # def index
+  #   raise CustomException.new(400, "Exception raised in index action")
+  # end
 
   def create
     @user= User.new(user_params)
@@ -47,6 +47,6 @@ class UsersController < ApplicationController
   end
 
   def address_params
-    params.permit(:address => [:line1,:line2,:city,:state,:pincode])
+    params.permit(:address => [:line1, :line2, :city, :state, :pincode])
   end
 end

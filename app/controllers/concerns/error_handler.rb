@@ -20,9 +20,8 @@ module ErrorHandler
 			  exception: {
 				message: exception.message,
 				exception: exception,
-				status: exception.status,
-			}}			
-		end
+				trace: exception.backtrace
+			}}
 		else
 			render json:
 			{ message: "Error Caught by global error handler (unchecked)", 
