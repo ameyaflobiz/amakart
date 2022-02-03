@@ -3,8 +3,7 @@ json.search_query do
 		json.name product.name
 
 		json.sellers product.seller_products.each do |seller_product|
-
-
+			
 			json.id seller_product.seller.id
 			json.name seller_product.seller.name
 			json.price seller_product.price

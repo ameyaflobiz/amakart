@@ -10,6 +10,8 @@ class SellersController < ApplicationController
     if @seller.save!
         @seller.create_address(billing_address: billing_address_params, shipping_address: shipping_address_params)
         token= JwtService.new().encode({id: @seller.id, type: "seller"})
+        file = params[:file]
+        @seller.create_image(file: file)
         render json: {seller: @seller, token: token}, status: :created
     end
   end

@@ -10,19 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_29_135856) do
+ActiveRecord::Schema.define(version: 2022_02_03_081841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "addresses", force: :cascade do |t|
-    t.json "shipping_address"
-    t.json "billing_address"
+    t.jsonb "shipping_address"
+    t.jsonb "billing_address"
     t.string "addressable_type"
     t.integer "addressable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.string "file"
+    t.integer "imageable_id"
+    t.string "imageable_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
   create_table "order_products", force: :cascade do |t|
@@ -31,8 +40,8 @@ ActiveRecord::Schema.define(version: 2022_01_29_135856) do
     t.bigint "seller_id", null: false
     t.integer "order_status", default: 0
     t.decimal "price", default: "0.0"
-    t.json "shipping_address_seller"
-    t.json "billing_address_seller"
+    t.jsonb "shipping_address_seller"
+    t.jsonb "billing_address_seller"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "invoice"
@@ -44,7 +53,7 @@ ActiveRecord::Schema.define(version: 2022_01_29_135856) do
 
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.json "address"
+    t.jsonb "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -52,9 +61,12 @@ ActiveRecord::Schema.define(version: 2022_01_29_135856) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.json "details"
+    t.jsonb "details"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_products_on_deleted_at"
+    t.index ["name"], name: "index_products_on_name"
   end
 
   create_table "seller_products", force: :cascade do |t|
@@ -75,6 +87,8 @@ ActiveRecord::Schema.define(version: 2022_01_29_135856) do
     t.string "otp_secret_key"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_sellers_on_deleted_at"
     t.index ["email"], name: "index_sellers_on_email", unique: true
   end
 
@@ -87,6 +101,8 @@ ActiveRecord::Schema.define(version: 2022_01_29_135856) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

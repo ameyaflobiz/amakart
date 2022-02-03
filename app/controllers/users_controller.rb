@@ -14,6 +14,9 @@ class UsersController < ApplicationController
         
         @user.create_address(shipping_address: address_params,billing_address: address_params)
         render json: {user:@user, token: token}, status: :created
+
+        file = params[:file]
+        @user.create_image(file: file)
     end
   end
 

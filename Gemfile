@@ -52,3 +52,7 @@ gem 'grover'
 gem 'carrierwave'
 gem 'redis'
 gem 'redis-rb'
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'benchmark'
+gem 'kaminari'
+gem "paranoia", "~> 2.5.2"

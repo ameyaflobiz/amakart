@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
     collection do
       post :login
+      post :add_image
     end
 
   end
@@ -32,6 +33,7 @@ Rails.application.routes.draw do
     collection do 
       post :add_product
       get :search
+      post :add_images
     end
 
   end

@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/faker-ruby/faker.git
+  revision: cb69fe43290c90e023ef241edfdad39180cc0c31
+  branch: master
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.8.11, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -62,6 +70,7 @@ GEM
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     bcrypt (3.1.16)
+    benchmark (0.2.0)
     bootsnap (1.10.2)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -135,6 +144,18 @@ GEM
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jwt (2.3.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -157,6 +178,8 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
+    paranoia (2.5.2)
+      activerecord (>= 5.1, < 7.1)
     pg (1.2.3)
     public_suffix (4.0.6)
     puma (4.3.10)
@@ -243,15 +266,19 @@ PLATFORMS
 DEPENDENCIES
   active_model_otp
   bcrypt
+  benchmark
   bootsnap (>= 1.4.2)
   byebug
   carrierwave
   config
+  faker!
   grover
   hirb
   jbuilder
   jwt
+  kaminari
   listen (~> 3.2)
+  paranoia (~> 2.5.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rack-cors

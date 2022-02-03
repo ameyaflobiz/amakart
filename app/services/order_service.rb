@@ -1,5 +1,12 @@
 class OrderService
 
+	def fetch_orders(user_id)
+
+		if @decoded_type == "user"
+			orders = Order.includes(:order_products).where(user_id: user_id)
+		end
+
+	end
 	def add_order_to_redis(params)
 		# Shouldv'e add check for quantity 
 		product_from_seller = SellerProduct.find_by(seller_id: params[:seller_id], product_id: params[:product_id])
@@ -94,4 +101,5 @@ class OrderService
 			raise CustomException.new(400,"Not enough products in stock")
 		end
 	end
+
 end

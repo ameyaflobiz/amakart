@@ -5,6 +5,9 @@ class OrdersController < ApplicationController
     # pdf = GeneratePdfWorker.perform_async(3,6,5)
     # File.open(Rails.root.join('report.pdf'),'wb', encoding: 'ascii-8bit') { |f| f.write(pdf)}
     # render json: { message: "Thank you for ordering!,Invoice will be saved on your computer soon"}
+    # orders = Order.includes(:order_products).where(user_id: @decoded_id)
+    orders = OrderService.new().fetch_orders(@decoded_id)
+    render json: orders.order_products
 
   end
 
