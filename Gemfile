@@ -56,3 +56,5 @@ gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'mast
 gem 'benchmark'
 gem 'kaminari'
 gem "paranoia", "~> 2.5.2"
+gem 'makara'
+gem "distribute_reads"

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_081841) do
+ActiveRecord::Schema.define(version: 2022_02_03_125650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_081841) do
     t.integer "addressable_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["addressable_type", "addressable_id"], name: "index_addresses_on_addressable_type_and_addressable_id"
   end
 
@@ -31,6 +32,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_081841) do
     t.string "imageable_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id"
   end
 
@@ -65,7 +67,6 @@ ActiveRecord::Schema.define(version: 2022_02_03_081841) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_products_on_deleted_at"
     t.index ["name"], name: "index_products_on_name"
   end
 
@@ -76,6 +77,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_081841) do
     t.integer "stock", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "deleted_at"
     t.index ["product_id"], name: "index_seller_products_on_product_id"
     t.index ["seller_id"], name: "index_seller_products_on_seller_id"
   end
@@ -88,7 +90,6 @@ ActiveRecord::Schema.define(version: 2022_02_03_081841) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_sellers_on_deleted_at"
     t.index ["email"], name: "index_sellers_on_email", unique: true
   end
 
@@ -102,7 +103,6 @@ ActiveRecord::Schema.define(version: 2022_02_03_081841) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "name"
     t.datetime "deleted_at"
-    t.index ["deleted_at"], name: "index_users_on_deleted_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 

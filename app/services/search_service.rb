@@ -3,18 +3,19 @@ class SearchService
 
 	def search(params)
 		# @products = Product.includes(:seller_products).where("name like ?","%#{search_query}%")
-		if (page_exist?(params[:page_num]))
-			raise CustomException.new(400,"Pages Out of range")
-		end
+		
 		search_query = params[:search_query]
 		page_num = params[:page_num] || 1
 		page_num = page_num.to_i
 
 		# puts "filtering_params" , params.slice(:brand)	
-		@products = Product.includes(:seller_products).
-						contains_string("#{search_query}").
-						order(:id).
-						page(page_num).order("seller_products.price asc")
+		ActiveRecord::Base.connected_to(role: :reading) do
+# the block of code we want connected to the writing role
+
+			@products = Product.with_deleted.includes(:seller_products).
+							contains_string("#{search_query}").
+							page(page_num).order("seller_products.price asc")
+		end
 
 		# filtered_params = filtering_params(params)
 

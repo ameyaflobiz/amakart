@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-	skip_before_action :authorize_request, only: [:search]
+	skip_before_action :authorize_request, only: [:index,:search]
 	before_action :is_user_product_team_member?, only: [:add_product]
 
 	def index
@@ -42,6 +42,7 @@ class ProductsController < ApplicationController
 				files.each do |file|
 					upload = @product.images.create!(file: file)
 				end
+				# raise ActiveRecord::Rollback
 			end
 		end
 		render json: params[:files]

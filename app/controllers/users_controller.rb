@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
-  skip_before_action :authorize_request, only: [ :create, :login, :get_otp]
+  skip_before_action :authorize_request, only: [:index, :create, :login, :get_otp]
   before_action :find_user, except: [:index, :create, :login, :get_otp]
 
-  # def index
-  #   raise CustomException.new(400, "Exception raised in index action")
-  # end
+  def index
+    # ActiveRecord::Base.connected_to(role: :reading) do
+      @user = User.find_by(email:params[:email])
+    # end
+
+    render json: @user
+  end
 
   def create
     @user= User.new(user_params)

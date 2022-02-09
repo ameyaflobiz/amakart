@@ -22,8 +22,26 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
-  <<: *default
-  database: amakart_development
+  # primary:
+  #   <<: *default
+  #   database: amakart_development
+  #   username: 'ameyajangam22'
+  #   port: 5432
+  primary:
+    <<: *default 
+    database: amakart_development
+    username: 'ameya_readonly'
+    port: 5434
+
+  # primary_replica:
+  #   <<: *default 
+  #   database: amakart_development
+  #   username: 'ameya_readonly'
+  #   port: 5434
+  #   replica: true
+
+
+
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.

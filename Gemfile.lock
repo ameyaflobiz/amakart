@@ -93,6 +93,8 @@ GEM
     connection_pool (2.2.5)
     crass (1.0.6)
     deep_merge (1.2.2)
+    distribute_reads (0.3.5)
+      makara (>= 0.3)
     dry-configurable (0.12.1)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.5, >= 0.5.0)
@@ -164,6 +166,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
+    makara (0.5.1)
+      activerecord (>= 5.2.0)
     marcel (1.0.2)
     matrix (0.4.2)
     method_source (1.0.0)
@@ -271,6 +275,7 @@ DEPENDENCIES
   byebug
   carrierwave
   config
+  distribute_reads
   faker!
   grover
   hirb
@@ -278,6 +283,7 @@ DEPENDENCIES
   jwt
   kaminari
   listen (~> 3.2)
+  makara
   paranoia (~> 2.5.2)
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
